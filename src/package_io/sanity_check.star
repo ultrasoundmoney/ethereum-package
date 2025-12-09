@@ -345,6 +345,7 @@ SUBCATEGORY_PARAMS = {
         "mev_relay_website_extra_env_vars",
         "mev_builder_extra_args",
         "mev_builder_prometheus_config",
+        "mev_builder_relay_url",
         "custom_flood_params",
         "mock_mev_image",
         "launch_adminer",

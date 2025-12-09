@@ -1165,6 +1165,9 @@ mev_params:
   mev_relay_website_extra_env_vars: {}
   # Extra parameters to send to the builder
   mev_builder_extra_args: []
+  # Optional relay URL override for the builder. If not set, uses the internal relay.
+  # Format: http://<pubkey>@<host>:<port>
+  mev_builder_relay_url: ""
   # Prometheus additional configuration for the mev builder participant.
   # Execution, beacon and validator client targets on prometheus will include this configuration.
   mev_builder_prometheus_config:
