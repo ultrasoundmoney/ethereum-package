@@ -38,6 +38,7 @@ def new_builder_config(
         num_of_participants,
         mev_params.mev_builder_subsidy,
         mev_type,
+        mev_params.mev_builder_relay_url,
     )
     flashbots_builder_config_template = read_file(
         static_files.FLASHBOTS_RBUILDER_CONFIG_FILEPATH
@@ -73,6 +74,7 @@ def new_builder_config_template_data(
     num_of_participants,
     subsidy,
     mev_type,
+    relay_url,
 ):
     # Determine relay service name and port based on MEV type
     if mev_type == constants.HELIX_MEV_TYPE:
@@ -83,6 +85,12 @@ def new_builder_config_template_data(
         relay_service = "mev-relay-api"
         relay_port = flashbots_relay.MEV_RELAY_ENDPOINT_PORT
         relay_name = "flashbots"
+
+    default_relay_url = "http://{0}@{1}:{2}".format(
+        pubkey,
+        relay_service,
+        relay_port,
+    )
 
     return {
         "Network": network_params.network
@@ -96,10 +104,8 @@ def new_builder_config_template_data(
             lighthouse.BEACON_HTTP_PORT_NUM,
         ),
         "GenesisForkVersion": constants.GENESIS_FORK_VERSION,
-        "Relay": relay_service,
-        "RelayPort": relay_port,
+        "RelayURL": relay_url if relay_url else default_relay_url,
         "RelayName": relay_name,
-        "PublicKey": pubkey,
         "SecretKey": secret,
         "Mnemonic": mnemonic,
         "FeeRecipient": fee_recipient,
