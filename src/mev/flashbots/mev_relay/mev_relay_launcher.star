@@ -232,4 +232,4 @@ def launch_mev_relay(
 
     return "http://{0}@{1}:{2}".format(
         constants.DEFAULT_MEV_PUBKEY, api.ip_address, MEV_RELAY_ENDPOINT_PORT
-    )
+    ) if not mev_params.mev_builder_relay_url else mev_params.mev_builder_relay_url

@@ -312,6 +312,7 @@ def run(plan, args={}):
 
     mev_endpoints = []
     mev_endpoint_names = []
+
     # passed external relays get priority
     # perhaps add mev_type External or remove this
     if (
@@ -413,6 +414,7 @@ def run(plan, args={}):
     # spin up the mev boost contexts if some endpoints for relays have been passed
     all_mevboost_contexts = []
     if mev_endpoints:
+        plan.print("mev_endpoints {0}".format(mev_endpoints))
         for index, participant in enumerate(all_participants):
             index_str = shared_utils.zfill_custom(
                 index + 1, len(str(len(all_participants)))
