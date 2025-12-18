@@ -1569,7 +1569,9 @@ def get_default_mev_params(mev_type, preset):
         mev_builder_image = constants.DEFAULT_FLASHBOTS_BUILDER_IMAGE
         mev_boost_image = constants.DEFAULT_FLASHBOTS_MEV_BOOST_IMAGE
         mev_builder_cl_image = DEFAULT_CL_IMAGES[constants.CL_TYPE.lighthouse]
-        mev_builder_extra_data = "0x556c747261736f756e6420f09fa687f09f948a"  # "Ultrasound 🦇🔊
+        mev_builder_extra_data = (
+            "0x556c747261736f756e6420f09fa687f09f948a"  # "Ultrasound 🦇🔊
+        )
 
     return {
         "mev_relay_image": mev_relay_image,

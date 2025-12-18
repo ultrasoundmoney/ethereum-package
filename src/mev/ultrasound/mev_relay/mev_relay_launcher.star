@@ -55,7 +55,7 @@ def launch_mev_relay(
         node_selectors=node_selectors,
         tolerations=tolerations,
     )
-    
+
     mevdb = postgres_module.run(
         plan,
         password="postgres",
@@ -123,12 +123,10 @@ def launch_mev_relay(
         "GLOBAL_DATABASE_URL": globaldb_url,
         "REDIS_URI": redis_url,
         "REDIS_READ_URI": redis_url,
-
         # General config
         "CONSENSUS_NODES": beacon_uris,
         "EXECUTION_CLIENT_URLS": blocksim_uri,
         "BLOCKSIM_URI": blocksim_uri,
-
         "GEO": "rbx",
         "RELAY_SECRET_KEY": constants.DEFAULT_MEV_SECRET_KEY,
         "PRIVATE_ROUTE_AUTH_TOKEN": "7D74sFpCHufoNaLwhreycRV4jsK4LM",
@@ -146,7 +144,6 @@ def launch_mev_relay(
         "TOKIO_WORKER_THREADS": "4",
         "LOG_JSON": "false",
         "RUST_LOG": "info",
-
         # Feature flags
         "FF_ENABLE_TOP_BID_GOSSIP": "false",
         "FF_LOWBALL_AMOUNT": "1",
@@ -154,7 +151,6 @@ def launch_mev_relay(
         "FF_ENABLE_DEHYDRATED_SUBMISSIONS": "false",
         "FF_PRIMEV_ENABLED": "false",
         "FF_PRIMEV_ENFORCE": "false",
-
         # Devnet specific configuration
         "NETWORK": "custom",
         "GENESIS_TIMESTAMP": final_genesis_timestamp,
@@ -169,7 +165,9 @@ def launch_mev_relay(
 
     plan.run_sh(
         description="Waiting for genesis timestamp to finalise",
-        run="while [ $(date +%s) -lt " + final_genesis_timestamp + " ]; do sleep 1; done",
+        run="while [ $(date +%s) -lt "
+        + final_genesis_timestamp
+        + " ]; do sleep 1; done",
     )
 
     api = plan.add_service(
@@ -181,7 +179,6 @@ def launch_mev_relay(
                 "http": PortSpec(
                     number=MEV_RELAY_ENDPOINT_PORT,
                     transport_protocol="TCP",
-                    # wait=None,
                 ),
             },
             public_ports=public_ports,
@@ -192,16 +189,6 @@ def launch_mev_relay(
             max_memory=RELAY_MAX_MEMORY,
             node_selectors=node_selectors,
             tolerations=tolerations,
-            # ready_conditions=ReadyCondition(
-            #     recipe=GetHttpRequestRecipe(
-            #         port_id="http",
-            #         endpoint="/auction-api/livez",
-            #     ),
-            #     field="code",
-            #     assertion="==",
-            #     target_value=200,
-            #     timeout="5m",
-            # ),
         ),
     )
 

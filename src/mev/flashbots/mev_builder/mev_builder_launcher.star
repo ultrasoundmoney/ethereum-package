@@ -40,6 +40,7 @@ def new_builder_config(
         mev_params.mev_builder_subsidy,
         mev_type,
     )
+
     flashbots_builder_config_template = read_file(
         static_files.FLASHBOTS_RBUILDER_CONFIG_FILEPATH
     )

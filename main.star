@@ -51,7 +51,9 @@ flashbots_mev_relay = import_module(
 )
 helix_relay = import_module("./src/mev/helix/helix_relay_launcher.star")
 mock_mev = import_module("./src/mev/flashbots/mock_mev/mock_mev_launcher.star")
-ultrasound_mev_relay = import_module("./src/mev/ultrasound/mev_relay/mev_relay_launcher.star")
+ultrasound_mev_relay = import_module(
+    "./src/mev/ultrasound/mev_relay/mev_relay_launcher.star"
+)
 mev_custom_flood = import_module(
     "./src/mev/flashbots/mev_custom_flood/mev_custom_flood_launcher.star"
 )
@@ -446,7 +448,8 @@ def run(plan, args={}):
                     args_with_right_defaults.mev_type == constants.FLASHBOTS_MEV_TYPE
                     or args_with_right_defaults.mev_type == constants.MOCK_MEV_TYPE
                     or args_with_right_defaults.mev_type == constants.HELIX_MEV_TYPE
-                    or args_with_right_defaults.mev_type == constants.ULTRASOUND_MEV_TYPE
+                    or args_with_right_defaults.mev_type
+                    == constants.ULTRASOUND_MEV_TYPE
                 ):
                     mev_boost_launcher = flashbots_mev_boost.new_mev_boost_launcher(
                         MEV_BOOST_SHOULD_CHECK_RELAY,
