@@ -21,6 +21,7 @@ Optional features (enabled via flags or parameter files at runtime):
 - Spin up & configure parameters for the infrastructure behind PBS (Proposer-Builder Separation) using `mev-boost`, with support for multiple relay implementations:
   - `flashbots` - Full Flashbots MEV infrastructure
   - `helix` - High-performance [Helix relay](https://github.com/gattaca-com/helix) with TimescaleDB backend
+  - `ultrasound` - Ultrasound turbo-relay implementation
   - `mev-rs` - Alternative relay implementation
   - `commit-boost` - Commit-boost based infrastructure
   - `mock` - Mock builder for testing

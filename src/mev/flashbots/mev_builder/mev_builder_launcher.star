@@ -4,6 +4,7 @@ static_files = import_module("../../../static_files/static_files.star")
 constants = import_module("../../../package_io/constants.star")
 flashbots_relay = import_module("../mev_relay/mev_relay_launcher.star")
 helix_relay = import_module("../../helix/helix_relay_launcher.star")
+ultrasound_relay = import_module("../../ultrasound/mev_relay/mev_relay_launcher.star")
 lighthouse = import_module("../../../cl/lighthouse/lighthouse_launcher.star")
 # MEV Builder flags
 
@@ -39,6 +40,7 @@ def new_builder_config(
         mev_params.mev_builder_subsidy,
         mev_type,
     )
+
     flashbots_builder_config_template = read_file(
         static_files.FLASHBOTS_RBUILDER_CONFIG_FILEPATH
     )
@@ -79,6 +81,10 @@ def new_builder_config_template_data(
         relay_service = "helix-relay"
         relay_port = helix_relay.HELIX_RELAY_ENDPOINT_PORT
         relay_name = "helix"
+    elif mev_type == constants.ULTRASOUND_MEV_TYPE:
+        relay_service = ultrasound_relay.MEV_RELAY_ENDPOINT
+        relay_port = ultrasound_relay.MEV_RELAY_ENDPOINT_PORT
+        relay_name = "ultrasound"
     else:
         relay_service = "mev-relay-api"
         relay_port = flashbots_relay.MEV_RELAY_ENDPOINT_PORT
